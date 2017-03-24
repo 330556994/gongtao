@@ -1,0 +1,80 @@
+<%@page pageEncoding="UTF-8"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+  <meta name="Robots" content="index,follow"/>
+  <title>"第三波书店"-网上书店</title>
+  <link href="${pageContext.request.contextPath }/css/global.css" rel="stylesheet" type="text/css"/>
+  <link href="${pageContext.request.contextPath }/css/Index.css" rel="stylesheet" type="text/css" />
+  <script src="${pageContext.request.contextPath }/Scripts/jquery-1.8.2.min.js"></script>
+  <script src="${pageContext.request.contextPath }/easyui1.5/jquery.easyui.min.js"></script>
+  <script>
+    function Exit(){
+      if(confirm("真的要退出吗?")){
+        location.href="user/exit";
+      }
+    }
+  </script>
+</head>
+<body>
+<div id="top">
+  <c:set var="totolMPrice" value="0"></c:set>
+  <c:set var="totolUPrice" value="0"></c:set>
+  <c:set var="buyCount" value="0"></c:set>
+  <c:forEach items="${items}" var="item">
+    <c:set var="totolMPrice" value="${totolMPrice+item.totalMarketPrice }"></c:set>
+    <c:set var="totolUPrice" value="${totolUPrice+item.totalUnitPrice }"></c:set>
+    <c:set var="buyCount" value="${buyCount+item.qty }"></c:set>
+  </c:forEach>
+  <div class="status">您好，欢迎来到第三波书店^_^
+  <c:choose>
+    <c:when test="${sessionScope.user.loginId==null}">
+         <span>
+           <a href="user/login">【登录】</a>
+           <a href="user/login">【免费注册】</a>
+           <a href="car">【购物车】</a>
+         </span>
+    </c:when>
+    <c:otherwise>
+      <span>
+         <a href="user/login">【会员中心】</a>
+         <a href="car">【购物车】</a>
+         <a href="javascript:void(0)" onclick="Exit()">【退出】</a>
+      </span>
+    </c:otherwise>
+  </c:choose>
+  </div>
+
+
+  <%--<div class="status">您好，欢迎来到第三波书店^_^--%>
+  <%--<span>--%>
+  <%--【会员中心】【购物车】【退出】--%>
+  <%--</span>--%>
+  <%--</div>--%>
+
+  <div class="member">
+    <ul>
+      <li><a href="#"><img src="${pageContext.request.contextPath }/img/payVIP.gif" height="18" alt="开通VIP"/></a></li>
+      <li><a href="#"><img src="${pageContext.request.contextPath }/img/payCoin.gif" height="18" alt="学币中心"/></a></li>
+    </ul>
+  </div>
+</div>
+
+<div id="header">
+  <div id="logo"><img src="${pageContext.request.contextPath }/img/logo.gif" alt="第三波书店"/></div>
+  <div id="nav">
+    <div id="a_b_01"><img src="${pageContext.request.contextPath }/img/a_b_01.gif"/>[<img src="${pageContext.request.contextPath }/img/taobao.gif"/> <a href="#">分站</a>]</div>
+    <ul id="mainnav">
+      <LI CLASS="CURRENT"><A HREF="INDEX.HTML">首页</A></LI>
+      <LI><A HREF="LOGIN.HTML">登录</A></LI>
+      <LI><A HREF="REGISTER.HTML">注册</A></LI>
+      <LI><A HREF="#">商讯</A></LI>
+      <LI><A HREF="#">购物流程</A></LI>
+      <LI><A HREF="#">在线客服</A></LI>
+      <LI><A HREF="#">积分兑换</A></LI>
+      <LI><A HREF="#">书籍求购</A></LI>
+      <LI><A HREF="#">帮助</A></LI>
+    </ul>
+  </div>
+</div>
